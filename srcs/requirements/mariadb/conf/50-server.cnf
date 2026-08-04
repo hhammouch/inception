@@ -1,0 +1,8 @@
+[mysqld]
+datadir = /var/lib/mysql
+socket = /run/mysqld/mysqld.sock
+# change it form 127.0.0.1 (localhost) to 0.0.0.0 to tell mariadb to accept
+# connections coming from the Docker network
+bind-address=0.0.0.0
+port =3306
+user = mysql
