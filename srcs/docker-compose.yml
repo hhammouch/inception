@@ -35,6 +35,55 @@ services:
     networks:
       - inception
 
+  adminer:
+    build: requirements/bonus/adminer
+    container_name: adminer
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - "8080:8080"
+    networks:
+      - inception
+
+  static_site:
+    build: requirements/bonus/static_site
+    container_name: static_site
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - inception
+  ftp:
+    build: requirements/bonus/ftp
+    container_name: ftp
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "21:21"
+      - "21100-21110:21100-21110"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception
+  redis:
+    build: requirements/bonus/redis
+    container_name: redis
+    restart: always
+    networks:
+      - inception
+  glances:
+    build: requirements/bonus/glances
+    container_name: glances
+    restart: always
+    ports:
+      - "61208:61208"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - inception
+
 volumes:
   mariadb_data:
     driver: local
