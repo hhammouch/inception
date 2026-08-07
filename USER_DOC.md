@@ -88,3 +88,4 @@ To verify that all services are up and running properly:
     ```bash
     docker exec -it wordpress wp redis status --allow-root --path=/var/www/html
     ```
+	
